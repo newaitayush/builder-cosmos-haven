@@ -30,6 +30,7 @@ const App = () => (
           <Route path="/create-loan" element={<CreateLoan />} />
           <Route path="/loans" element={<ViewLoans />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/import" element={<DataImporter />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
