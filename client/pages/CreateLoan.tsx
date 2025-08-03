@@ -80,9 +80,9 @@ export default function CreateLoan() {
       // Mock customer data
       const mockCustomer: CustomerInfo = {
         customer_id: parseInt(customerId),
-        first_name: 'John',
-        last_name: 'Doe',
-        monthly_salary: 75000,
+        first_name: 'Rajesh',
+        last_name: 'Kumar',
+        monthly_salary: 75000, // Already in INR
         approved_limit: 2700000, // 75000 * 36
         existing_loans: Math.floor(Math.random() * 3)
       };
