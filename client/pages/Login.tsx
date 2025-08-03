@@ -37,7 +37,7 @@ export default function Login() {
     return <Navigate to={from} replace />;
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
@@ -55,6 +55,48 @@ export default function Login() {
       }
     } catch (err) {
       setError('Login failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    // Validation
+    if (!regEmail || !regUsername || !regPassword || !regConfirmPassword) {
+      setError('Please fill in all fields');
+      setLoading(false);
+      return;
+    }
+
+    if (regPassword !== regConfirmPassword) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
+
+    if (regPassword.length < 6) {
+      setError('Password must be at least 6 characters long');
+      setLoading(false);
+      return;
+    }
+
+    if (!regEmail.includes('@')) {
+      setError('Please enter a valid email address');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const success = await register(regEmail, regPassword, regUsername);
+      if (!success) {
+        setError('Username or email already exists');
+      }
+    } catch (err) {
+      setError('Registration failed. Please try again.');
     } finally {
       setLoading(false);
     }
