@@ -240,7 +240,7 @@ export default function AdminDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Total Disbursed</p>
-                  <p className="text-3xl font-bold">{formatCurrency(stats?.totalDisbursed || 0)}</p>
+                  <p className="text-3xl font-bold">{formatIndianNumber(stats?.totalDisbursed || 0)}</p>
                   <p className="text-sm text-green-600 mt-1">↑ 15% from last month</p>
                 </div>
                 <DollarSign className="h-8 w-8 text-green-500" />
