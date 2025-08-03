@@ -8,7 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Shield, ArrowLeft, Search, Filter, Eye, Calendar, DollarSign, CreditCard, TrendingUp } from 'lucide-react';
+import { Shield, ArrowLeft, Search, Filter, Eye, Calendar, IndianRupee, CreditCard, TrendingUp } from 'lucide-react';
+import { formatIndianCurrency, convertToINR } from '@/lib/currency';
 
 interface Loan {
   loan_id: number;
