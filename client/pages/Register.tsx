@@ -279,14 +279,14 @@ export default function Register() {
 
                 <div className="space-y-2">
                   <Label htmlFor="monthly_salary" className="flex items-center space-x-1">
-                    <DollarSign className="h-4 w-4" />
-                    <span>Monthly Salary</span>
+                    <IndianRupee className="h-4 w-4" />
+                    <span>मासिक वेतन (Monthly Salary)</span>
                   </Label>
                   <Input
                     id="monthly_salary"
                     name="monthly_salary"
                     type="number"
-                    placeholder="Enter monthly salary"
+                    placeholder="Enter monthly salary in ₹"
                     min="1"
                     value={formData.monthly_salary}
                     onChange={handleInputChange}
@@ -294,7 +294,7 @@ export default function Register() {
                   />
                   {formData.monthly_salary && (
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Approved Credit Limit: ${calculateApprovedLimit(parseInt(formData.monthly_salary) || 0).toLocaleString()}
+                      Approved Credit Limit: {formatIndianCurrency(calculateApprovedLimit(parseInt(formData.monthly_salary) || 0))}
                     </p>
                   )}
                 </div>
