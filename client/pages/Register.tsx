@@ -270,7 +270,7 @@ export default function Register() {
                 <div className="space-y-2">
                   <Label htmlFor="monthly_salary" className="flex items-center space-x-1">
                     <IndianRupee className="h-4 w-4" />
-                    <span>मासिक वेतन (Monthly Salary)</span>
+                    <span>Monthly Salary</span>
                   </Label>
                   <Input
                     id="monthly_salary"
