@@ -74,11 +74,15 @@ export default function Index() {
       <section className="py-20 px-4">
         <div className="container mx-auto text-center">
           <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Smart Credit Approval System
+            स्मार्ट लोन अप्रूवल सिस्टम
+            <br />
+            <span className="text-3xl">Smart Loan Approval System</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-            Streamline your lending process with intelligent credit scoring, automated approvals, 
-            and comprehensive loan management. Make informed decisions faster than ever.
+            भारतीय ग्राहकों के लिए तेज़ और सुरक्षित लोन प्रक्रिया। AI-powered credit scoring,
+            instant approvals, और comprehensive loan management के साथ।
+            <br />
+            <span className="text-lg mt-2 block">Fast and secure loan processing for Indian customers with intelligent credit scoring and automated approvals.</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="text-lg px-8 py-3">
