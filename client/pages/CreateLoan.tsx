@@ -288,13 +288,9 @@ export default function CreateLoan() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              नया लोन बनाएं
-              <br />
-              <span className="text-2xl">Create New Loan</span>
+              Create New Loan
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              स्वचालित EMI गणना और सत्यापन के साथ लोन आवेदन प्रक्रिया
-              <br />
               Process loan applications with automatic EMI calculation and validation
             </p>
           </div>
