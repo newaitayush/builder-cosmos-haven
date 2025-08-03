@@ -98,7 +98,7 @@ export default function Index() {
                 <CardTitle className="text-3xl font-bold">{stats.totalCustomers.toLocaleString('en-IN')}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>कुल ग्राहक (Total Customers)</CardDescription>
+                <CardDescription>Total Customers</CardDescription>
               </CardContent>
             </Card>
 
@@ -108,7 +108,7 @@ export default function Index() {
                 <CardTitle className="text-3xl font-bold">{stats.activeLoans.toLocaleString('en-IN')}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>सक्रिय लोन (Active Loans)</CardDescription>
+                <CardDescription>Active Loans</CardDescription>
               </CardContent>
             </Card>
 
@@ -118,17 +118,17 @@ export default function Index() {
                 <CardTitle className="text-3xl font-bold">{stats.approvalRate}%</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>अप्रूवल दर (Approval Rate)</CardDescription>
+                <CardDescription>Approval Rate</CardDescription>
               </CardContent>
             </Card>
-            
+
             <Card className="text-center">
               <CardHeader className="pb-2">
                 <IndianRupee className="h-8 w-8 text-blue-500 mx-auto mb-2" />
                 <CardTitle className="text-3xl font-bold">{formatIndianNumber(stats.totalDisbursed)}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>कुल वितरित राशि (Total Disbursed)</CardDescription>
+                <CardDescription>Total Disbursed</CardDescription>
               </CardContent>
             </Card>
           </div>
