@@ -264,15 +264,20 @@ export default function Index() {
         <div className="container mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Shield className="h-6 w-6" />
-            <span className="text-xl font-bold">CreditFlow</span>
+            <span className="text-xl font-bold">
+              <span className="text-primary">Bharati</span>
+              <span className="text-accent">Finance</span>
+            </span>
           </div>
           <p className="text-gray-400 mb-4">
-            Intelligent Credit Approval System for Modern Financial Institutions
+            भारतीय वित्त���य संस्थानों के लिए स्मार्ट लोन अप्रूवल सिस्टम
+            <br />
+            Intelligent Credit Approval System for Indian Financial Institutions
           </p>
           <div className="flex justify-center space-x-6 text-sm text-gray-400">
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
-            <span>Support</span>
+            <span>गोपनीयता नीति (Privacy Policy)</span>
+            <span>सेवा की शर्तें (Terms)</span>
+            <span>सहायता (Support)</span>
             <span>API Documentation</span>
           </div>
         </div>
