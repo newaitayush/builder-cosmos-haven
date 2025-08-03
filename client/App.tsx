@@ -21,6 +21,11 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/check-eligibility" element={<CheckEligibility />} />
+          {/* Placeholder routes for remaining pages */}
+          <Route path="/create-loan" element={<NotFound />} />
+          <Route path="/loans" element={<NotFound />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
