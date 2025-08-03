@@ -30,7 +30,7 @@ export default function Register() {
   const [error, setError] = useState('');
 
   const calculateApprovedLimit = (salary: number) => {
-    return salary * 36;
+    return salary * 36; // 3 years salary as per Indian lending norms
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
