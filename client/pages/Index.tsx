@@ -4,8 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { CreditCard, Users, DollarSign, TrendingUp, Shield, Clock, User, LogOut } from 'lucide-react';
+import { CreditCard, Users, IndianRupee, TrendingUp, Shield, Clock, User, LogOut } from 'lucide-react';
 import { useAuth } from '@/lib/auth';
+import { formatIndianCurrency, formatIndianNumber, convertToINR } from '@/lib/currency';
 
 export default function Index() {
   const { isAuthenticated, user, logout } = useAuth();
