@@ -8,6 +8,7 @@ import { CreditCard, Users, DollarSign, TrendingUp, Shield, Clock, User, LogOut 
 import { useAuth } from '@/lib/auth';
 
 export default function Index() {
+  const { isAuthenticated, user, logout } = useAuth();
   const [stats] = useState({
     totalCustomers: 2847,
     activeLoans: 1234,
