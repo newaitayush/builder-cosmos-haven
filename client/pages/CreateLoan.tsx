@@ -7,7 +7,8 @@ import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Shield, ArrowLeft, CreditCard, DollarSign, Calendar, TrendingUp, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Shield, ArrowLeft, CreditCard, IndianRupee, Calendar, TrendingUp, CheckCircle, AlertTriangle } from 'lucide-react';
+import { formatIndianCurrency, convertToINR } from '@/lib/currency';
 
 interface LoanFormData {
   customer_id: string;
