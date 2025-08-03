@@ -243,7 +243,7 @@ export default function AdminDashboard() {
                   <p className="text-3xl font-bold">{formatIndianNumber(stats?.totalDisbursed || 0)}</p>
                   <p className="text-sm text-green-600 mt-1">↑ 15% from last month</p>
                 </div>
-                <DollarSign className="h-8 w-8 text-green-500" />
+                <IndianRupee className="h-8 w-8 text-green-500" />
               </div>
             </CardContent>
           </Card>
