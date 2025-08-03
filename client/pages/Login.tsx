@@ -111,7 +111,7 @@ export default function Login() {
             <span className="text-3xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
           </div>
           <p className="text-gray-600 dark:text-gray-300">
-            Sign in to access the admin dashboard
+            Sign in to your account or create a new one to get started
           </p>
         </div>
 
