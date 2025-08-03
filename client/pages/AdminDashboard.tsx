@@ -57,12 +57,12 @@ export default function AdminDashboard() {
   const generateMockData = () => {
     // Dashboard Stats
     const mockStats: DashboardStats = {
-      totalCustomers: 2847,
-      totalLoans: 1234,
-      totalDisbursed: 45600000,
+      totalCustomers: 28470,
+      totalLoans: 12340,
+      totalDisbursed: convertToINR(45600000),
       averageCreditScore: 7.2,
       approvalRate: 78.5,
-      overdueLoans: 45
+      overdueLoans: 450
     };
 
     // Approval/Rejection Data
