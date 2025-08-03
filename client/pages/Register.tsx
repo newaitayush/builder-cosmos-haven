@@ -140,7 +140,7 @@ export default function Register() {
                         {formatIndianCurrency(approvedLimit)}
                       </p>
                       <p className="text-sm text-gray-500 mt-1">
-                        वेतन का 36 गुना (36x monthly salary)
+                        Calculated as 36x monthly salary
                       </p>
                     </div>
                     <IndianRupee className="h-12 w-12 text-primary" />
