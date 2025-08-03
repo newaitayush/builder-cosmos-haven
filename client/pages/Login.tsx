@@ -26,7 +26,7 @@ export default function Login() {
   // Common state
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState('register');
+  const [activeTab, setActiveTab] = useState('login');
 
   const { isAuthenticated, login, register } = useAuth();
   const location = useLocation();
