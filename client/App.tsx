@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import CheckEligibility from "./pages/CheckEligibility";
 import CreateLoan from "./pages/CreateLoan";
 import ViewLoans from "./pages/ViewLoans";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
