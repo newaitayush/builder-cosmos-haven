@@ -186,14 +186,10 @@ export default function Register() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              नया ग्राहक पंजीकरण
-              <br />
-              <span className="text-2xl">Register New Customer</span>
+              Register New Customer
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              स्वचालित क्रेडिट लिमिट गणना के साथ नया ग्राहक जोड़ें
-              <br />
-              Add a new customer with automatic credit limit calculation
+              Add a new customer to the system with automatic credit limit calculation
             </p>
           </div>
 
