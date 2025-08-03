@@ -198,10 +198,7 @@ export default function CreateLoan() {
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center space-x-2">
               <Shield className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                <span className="text-primary">Bharati</span>
-                <span className="text-accent">Finance</span>
-              </span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
             </div>
           </div>
         </header>
@@ -275,10 +272,7 @@ export default function CreateLoan() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Shield className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                <span className="text-primary">Bharati</span>
-                <span className="text-accent">Finance</span>
-              </span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
             </div>
             <Button asChild variant="ghost">
               <Link to="/" className="flex items-center space-x-2">
