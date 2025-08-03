@@ -131,11 +131,11 @@ export default function Index() {
             
             <Card className="text-center">
               <CardHeader className="pb-2">
-                <DollarSign className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-                <CardTitle className="text-3xl font-bold">${(stats.totalDisbursed / 1000000).toFixed(1)}M</CardTitle>
+                <IndianRupee className="h-8 w-8 text-blue-500 mx-auto mb-2" />
+                <CardTitle className="text-3xl font-bold">{formatIndianNumber(stats.totalDisbursed)}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>Total Disbursed</CardDescription>
+                <CardDescription>कुल वितरित राशि (Total Disbursed)</CardDescription>
               </CardContent>
             </Card>
           </div>
