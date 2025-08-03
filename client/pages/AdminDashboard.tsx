@@ -451,6 +451,9 @@ export default function AdminDashboard() {
                 <Button asChild variant="outline" className="w-full">
                   <Link to="/register">Add Customer</Link>
                 </Button>
+                <Button asChild variant="outline" className="w-full">
+                  <Link to="/import">Import Data</Link>
+                </Button>
                 <Button variant="outline" className="w-full">
                   Generate Report
                 </Button>
