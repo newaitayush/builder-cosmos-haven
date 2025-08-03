@@ -11,10 +11,10 @@ import { formatIndianCurrency, formatIndianNumber, convertToINR } from '@/lib/cu
 export default function Index() {
   const { isAuthenticated, user, logout } = useAuth();
   const [stats] = useState({
-    totalCustomers: 2847,
-    activeLoans: 1234,
+    totalCustomers: 28470,
+    activeLoans: 12340,
     approvalRate: 78,
-    totalDisbursed: 45600000,
+    totalDisbursed: convertToINR(45600000), // Convert from USD to INR
   });
 
   return (
