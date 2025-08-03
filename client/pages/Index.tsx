@@ -139,9 +139,7 @@ export default function Index() {
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
-            आधुनिक लेंडिंग के लिए शक्तिशाली फीचर्स
-            <br />
-            <span className="text-xl">Powerful Features for Modern Indian Lending</span>
+            Powerful Features for Modern Lending
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="hover:shadow-lg transition-shadow">
