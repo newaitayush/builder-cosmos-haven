@@ -37,10 +37,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = async (username: string, password: string): Promise<boolean> => {
-    // Simple demo authentication - in production, this would call your API
+    // Check registered users first
+    const registeredUsers = JSON.parse(localStorage.getItem('creditflow_users') || '[]');
+    const registeredUser = registeredUsers.find(
+      (user: any) => user.username === username && user.password === password
+    );
+
+    if (registeredUser) {
+      const authData = {
+        user: { username: registeredUser.username, role: registeredUser.role, email: registeredUser.email },
+        timestamp: Date.now(),
+      };
+
+      localStorage.setItem('creditflow_auth', JSON.stringify(authData));
+      setIsAuthenticated(true);
+      setUser({ username: registeredUser.username, role: registeredUser.role, email: registeredUser.email });
+      return true;
+    }
+
+    // Fallback to demo credentials
     const validCredentials = [
-      { username: 'admin', password: 'admin123', role: 'admin' },
-      { username: 'manager', password: 'manager123', role: 'manager' },
+      { username: 'admin', password: 'admin123', role: 'admin', email: 'admin@creditflow.com' },
+      { username: 'manager', password: 'manager123', role: 'manager', email: 'manager@creditflow.com' },
     ];
 
     const user = validCredentials.find(
@@ -49,17 +67,55 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     if (user) {
       const authData = {
-        user: { username: user.username, role: user.role },
+        user: { username: user.username, role: user.role, email: user.email },
         timestamp: Date.now(),
       };
-      
+
       localStorage.setItem('creditflow_auth', JSON.stringify(authData));
       setIsAuthenticated(true);
-      setUser({ username: user.username, role: user.role });
+      setUser({ username: user.username, role: user.role, email: user.email });
       return true;
     }
 
     return false;
+  };
+
+  const register = async (email: string, password: string, username: string): Promise<boolean> => {
+    // Simple registration logic - in production, this would call your API
+    const registeredUsers = JSON.parse(localStorage.getItem('creditflow_users') || '[]');
+
+    // Check if user already exists
+    const existingUser = registeredUsers.find(
+      (user: any) => user.username === username || user.email === email
+    );
+
+    if (existingUser) {
+      return false; // User already exists
+    }
+
+    // Add new user (default role is 'user', admin can promote later)
+    const newUser = {
+      username,
+      email,
+      password,
+      role: 'user',
+      createdAt: Date.now(),
+    };
+
+    registeredUsers.push(newUser);
+    localStorage.setItem('creditflow_users', JSON.stringify(registeredUsers));
+
+    // Automatically log in the user after registration
+    const authData = {
+      user: { username: newUser.username, role: newUser.role, email: newUser.email },
+      timestamp: Date.now(),
+    };
+
+    localStorage.setItem('creditflow_auth', JSON.stringify(authData));
+    setIsAuthenticated(true);
+    setUser({ username: newUser.username, role: newUser.role, email: newUser.email });
+
+    return true;
   };
 
   const logout = () => {
