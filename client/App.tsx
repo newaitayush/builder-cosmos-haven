@@ -12,6 +12,7 @@ import CheckEligibility from "./pages/CheckEligibility";
 import CreateLoan from "./pages/CreateLoan";
 import ViewLoans from "./pages/ViewLoans";
 import AdminDashboard from "./pages/AdminDashboard";
+import DataImporter from "./pages/DataImporter";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
