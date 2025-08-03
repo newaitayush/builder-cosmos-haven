@@ -137,7 +137,7 @@ export default function CreateLoan() {
     const availableLimit = customerInfo.approved_limit - (customerInfo.existing_loans * 500000); // Assuming avg existing loan of 500k
     
     if (loanAmount > availableLimit) {
-      return `Loan amount exceeds available limit of $${availableLimit.toLocaleString()}`;
+      return `Loan amount exceeds available limit of ${formatIndianCurrency(availableLimit)}`;
     }
     
     if (loanCalculation && loanCalculation.debt_to_income_ratio > 50) {
@@ -198,7 +198,10 @@ export default function CreateLoan() {
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center space-x-2">
               <Shield className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                <span className="text-primary">Bharati</span>
+                <span className="text-accent">Finance</span>
+              </span>
             </div>
           </div>
         </header>
@@ -225,7 +228,7 @@ export default function CreateLoan() {
                   </div>
                   <div className="p-4 bg-white dark:bg-gray-800 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-400">Loan Amount</p>
-                    <p className="font-semibold">${parseInt(formData.loan_amount).toLocaleString()}</p>
+                    <p className="font-semibold">{formatIndianCurrency(parseInt(formData.loan_amount))}</p>
                   </div>
                   <div className="p-4 bg-white dark:bg-gray-800 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-400">Tenure</p>
@@ -242,7 +245,7 @@ export default function CreateLoan() {
                     <div>
                       <p className="text-sm text-gray-600 dark:text-gray-400">Monthly EMI</p>
                       <p className="text-3xl font-bold text-primary">
-                        ${loanCalculation?.monthly_emi.toLocaleString()}
+                        {formatIndianCurrency(loanCalculation?.monthly_emi || 0)}
                       </p>
                     </div>
                     <CreditCard className="h-12 w-12 text-primary" />
@@ -272,7 +275,10 @@ export default function CreateLoan() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Shield className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                <span className="text-primary">Bharati</span>
+                <span className="text-accent">Finance</span>
+              </span>
             </div>
             <Button asChild variant="ghost">
               <Link to="/" className="flex items-center space-x-2">
@@ -336,11 +342,11 @@ export default function CreateLoan() {
                             </div>
                             <div>
                               <p className="text-gray-600 dark:text-gray-400">Monthly Salary</p>
-                              <p className="font-semibold">${customerInfo.monthly_salary.toLocaleString()}</p>
+                              <p className="font-semibold">{formatIndianCurrency(customerInfo.monthly_salary)}</p>
                             </div>
                             <div>
                               <p className="text-gray-600 dark:text-gray-400">Credit Limit</p>
-                              <p className="font-semibold">${customerInfo.approved_limit.toLocaleString()}</p>
+                              <p className="font-semibold">{formatIndianCurrency(customerInfo.approved_limit)}</p>
                             </div>
                             <div>
                               <p className="text-gray-600 dark:text-gray-400">Existing Loans</p>
@@ -353,7 +359,7 @@ export default function CreateLoan() {
 
                     <div className="space-y-2">
                       <Label htmlFor="loan_amount" className="flex items-center space-x-1">
-                        <DollarSign className="h-4 w-4" />
+                        <IndianRupee className="h-4 w-4" />
                         <span>Loan Amount</span>
                       </Label>
                       <Input
@@ -439,11 +445,11 @@ export default function CreateLoan() {
                     <div className="space-y-3 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600 dark:text-gray-400">Total Interest</span>
-                        <span className="font-semibold">${loanCalculation.total_interest.toLocaleString()}</span>
+                        <span className="font-semibold">{formatIndianCurrency(loanCalculation.total_interest)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600 dark:text-gray-400">Total Amount</span>
-                        <span className="font-semibold">${loanCalculation.total_amount.toLocaleString()}</span>
+                        <span className="font-semibold">{formatIndianCurrency(loanCalculation.total_amount)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600 dark:text-gray-400">Debt-to-Income</span>
@@ -498,7 +504,7 @@ export default function CreateLoan() {
               </div>
               <div>
                 <p className="text-gray-600">Monthly EMI</p>
-                <p className="font-semibold text-primary">${loanCalculation?.monthly_emi.toLocaleString()}</p>
+                <p className="font-semibold text-primary">{formatIndianCurrency(loanCalculation?.monthly_emi || 0)}</p>
               </div>
               <div>
                 <p className="text-gray-600">Tenure</p>
