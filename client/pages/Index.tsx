@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CreditCard, Users, DollarSign, TrendingUp, Shield, Clock } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { CreditCard, Users, DollarSign, TrendingUp, Shield, Clock, User, LogOut } from 'lucide-react';
+import { useAuth } from '@/lib/auth';
 
 export default function Index() {
   const [stats] = useState({
