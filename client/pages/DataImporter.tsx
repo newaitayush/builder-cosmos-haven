@@ -427,14 +427,14 @@ Michael,Johnson,35,+1234567892,65000`;
                     <li>• last_name: Text (required)</li>
                     <li>• age: Number 18-100 (required)</li>
                     <li>• phone_number: Text (required)</li>
-                    <li>• monthly_salary: Number > 0 (required)</li>
+                    <li>• monthly_salary: Number &gt; 0 (required)</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">Loan Data Format</h4>
                   <ul className="text-sm space-y-1 text-gray-600 dark:text-gray-400">
-                    <li>• customer_id: Number > 0 (required)</li>
-                    <li>• loan_amount: Number > 0 (required)</li>
+                    <li>• customer_id: Number &gt; 0 (required)</li>
+                    <li>• loan_amount: Number &gt; 0 (required)</li>
                     <li>• tenure: Number 1-360 months (required)</li>
                     <li>• interest_rate: Number 0.1-50% (required)</li>
                     <li>• emis_paid_on_time: Number ≥ 0</li>
