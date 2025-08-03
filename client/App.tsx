@@ -28,6 +28,7 @@ const App = () => (
           <Route path="/check-eligibility" element={<CheckEligibility />} />
           <Route path="/create-loan" element={<CreateLoan />} />
           <Route path="/loans" element={<ViewLoans />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
