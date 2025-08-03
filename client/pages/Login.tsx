@@ -10,13 +10,25 @@ import { Shield, Eye, EyeOff, UserPlus } from 'lucide-react';
 import { useAuth } from '@/lib/auth';
 
 export default function Login() {
+  // Login state
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  // Registration state
+  const [regEmail, setRegEmail] = useState('');
+  const [regUsername, setRegUsername] = useState('');
+  const [regPassword, setRegPassword] = useState('');
+  const [regConfirmPassword, setRegConfirmPassword] = useState('');
+  const [showRegPassword, setShowRegPassword] = useState(false);
+  const [showRegConfirmPassword, setShowRegConfirmPassword] = useState(false);
+
+  // Common state
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
-  const { isAuthenticated, login } = useAuth();
+  const [activeTab, setActiveTab] = useState('login');
+
+  const { isAuthenticated, login, register } = useAuth();
   const location = useLocation();
   
   // Redirect if already authenticated
