@@ -25,10 +25,7 @@ export default function Index() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Shield className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                <span className="text-primary">Bharati</span>
-                <span className="text-accent">Finance</span>
-              </span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
             </div>
             <div className="flex items-center space-x-6">
               <nav className="hidden md:flex items-center space-x-6">
@@ -270,7 +267,7 @@ export default function Index() {
             </span>
           </div>
           <p className="text-gray-400 mb-4">
-            भारतीय वित्त���य संस्थानों के लिए स्मार्ट लोन अप्रूवल सिस्टम
+            भारतीय वित्तीय संस्थानों के लिए स्मार्ट लोन अप्रूवल सिस्टम
             <br />
             Intelligent Credit Approval System for Indian Financial Institutions
           </p>
