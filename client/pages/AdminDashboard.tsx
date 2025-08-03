@@ -89,11 +89,11 @@ export default function AdminDashboard() {
 
     // Salary Band Analysis
     const mockSalaryBandData: SalaryBandData[] = [
-      { range: '$20K-40K', customers: 432, avgLoanAmount: 180000, approvalRate: 65 },
-      { range: '$40K-60K', customers: 678, avgLoanAmount: 320000, approvalRate: 75 },
-      { range: '$60K-80K', customers: 543, avgLoanAmount: 450000, approvalRate: 82 },
-      { range: '$80K-100K', customers: 387, avgLoanAmount: 620000, approvalRate: 88 },
-      { range: '$100K+', customers: 234, avgLoanAmount: 850000, approvalRate: 92 }
+      { range: '₹15L-30L', customers: 432, avgLoanAmount: convertToINR(180000), approvalRate: 65 },
+      { range: '₹30L-50L', customers: 678, avgLoanAmount: convertToINR(320000), approvalRate: 75 },
+      { range: '₹50L-70L', customers: 543, avgLoanAmount: convertToINR(450000), approvalRate: 82 },
+      { range: '₹70L-100L', customers: 387, avgLoanAmount: convertToINR(620000), approvalRate: 88 },
+      { range: '₹100L+', customers: 234, avgLoanAmount: convertToINR(850000), approvalRate: 92 }
     ];
 
     // Customer Segments
