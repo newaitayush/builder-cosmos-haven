@@ -140,13 +140,13 @@ export default function Register() {
                     <div>
                       <p className="text-sm text-gray-600 dark:text-gray-400">Approved Credit Limit</p>
                       <p className="text-3xl font-bold text-primary">
-                        ${approvedLimit.toLocaleString()}
+                        {formatIndianCurrency(approvedLimit)}
                       </p>
                       <p className="text-sm text-gray-500 mt-1">
-                        Calculated as 36x monthly salary
+                        वेतन का 36 गुना (36x monthly salary)
                       </p>
                     </div>
-                    <DollarSign className="h-12 w-12 text-primary" />
+                    <IndianRupee className="h-12 w-12 text-primary" />
                   </div>
                 </div>
 
