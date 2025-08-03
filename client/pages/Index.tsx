@@ -102,30 +102,30 @@ export default function Index() {
             <Card className="text-center">
               <CardHeader className="pb-2">
                 <Users className="h-8 w-8 text-primary mx-auto mb-2" />
-                <CardTitle className="text-3xl font-bold">{stats.totalCustomers.toLocaleString()}</CardTitle>
+                <CardTitle className="text-3xl font-bold">{stats.totalCustomers.toLocaleString('en-IN')}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>Total Customers</CardDescription>
+                <CardDescription>कुल ग्राहक (Total Customers)</CardDescription>
               </CardContent>
             </Card>
-            
+
             <Card className="text-center">
               <CardHeader className="pb-2">
                 <CreditCard className="h-8 w-8 text-accent mx-auto mb-2" />
-                <CardTitle className="text-3xl font-bold">{stats.activeLoans.toLocaleString()}</CardTitle>
+                <CardTitle className="text-3xl font-bold">{stats.activeLoans.toLocaleString('en-IN')}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>Active Loans</CardDescription>
+                <CardDescription>सक्रिय लोन (Active Loans)</CardDescription>
               </CardContent>
             </Card>
-            
+
             <Card className="text-center">
               <CardHeader className="pb-2">
                 <TrendingUp className="h-8 w-8 text-green-500 mx-auto mb-2" />
                 <CardTitle className="text-3xl font-bold">{stats.approvalRate}%</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>Approval Rate</CardDescription>
+                <CardDescription>अप्रूवल दर (Approval Rate)</CardDescription>
               </CardContent>
             </Card>
             
