@@ -27,6 +27,7 @@ export default function Index() {
               <Link to="/register" className="text-gray-600 hover:text-primary dark:text-gray-300">Register Customer</Link>
               <Link to="/check-eligibility" className="text-gray-600 hover:text-primary dark:text-gray-300">Check Eligibility</Link>
               <Link to="/loans" className="text-gray-600 hover:text-primary dark:text-gray-300">Loans</Link>
+              <Link to="/admin" className="text-gray-600 hover:text-primary dark:text-gray-300">Admin</Link>
             </nav>
           </div>
         </div>
