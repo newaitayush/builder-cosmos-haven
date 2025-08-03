@@ -5,7 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Shield, ArrowLeft, User, Phone, DollarSign, Calendar } from 'lucide-react';
+import { Shield, ArrowLeft, User, Phone, IndianRupee, Calendar } from 'lucide-react';
+import { formatIndianCurrency, convertToINR } from '@/lib/currency';
 
 interface CustomerFormData {
   first_name: string;
