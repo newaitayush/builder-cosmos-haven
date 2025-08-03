@@ -145,12 +145,12 @@ export default function Index() {
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <Shield className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>स्मार्ट क्रेडिट स्कोरिंग (Smart Credit Scoring)</CardTitle>
+                <CardTitle>Smart Credit Scoring</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Advanced algorithms analyze payment history और calculate precise credit scores
-                  based on EMI payment patterns और financial behavior. CIBIL और अन्य credit bureaus के साथ integrated.
+                  Advanced algorithms analyze payment history and calculate precise credit scores
+                  based on EMI payment patterns and financial behavior.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -158,12 +158,12 @@ export default function Index() {
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <Clock className="h-12 w-12 text-accent mb-4" />
-                <CardTitle>तत्काल योग्यता जांच (Instant Eligibility)</CardTitle>
+                <CardTitle>Instant Eligibility</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
                   Real-time eligibility checks with automated approval recommendations
-                  और competitive interest rate suggestions. RBI guidelines के अनुसार।
+                  and competitive interest rate suggestions.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -171,12 +171,12 @@ export default function Index() {
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <TrendingUp className="h-12 w-12 text-green-500 mb-4" />
-                <CardTitle>लोन प्रबंधन (Loan Management)</CardTitle>
+                <CardTitle>Loan Management</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
                   Comprehensive loan tracking with EMI calculations, payment schedules,
-                  और detailed customer loan portfolios. GST और TDS compliance के साथ।
+                  and detailed customer loan portfolios.
                 </CardDescription>
               </CardContent>
             </Card>
