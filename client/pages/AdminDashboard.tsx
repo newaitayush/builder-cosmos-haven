@@ -6,7 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { BarChart, Bar, XAxis, YAxis, PieChart, Pie, Cell, LineChart, Line, ResponsiveContainer } from 'recharts';
-import { Shield, ArrowLeft, TrendingUp, Users, CreditCard, DollarSign, AlertCircle, Target } from 'lucide-react';
+import { Shield, ArrowLeft, TrendingUp, Users, CreditCard, IndianRupee, AlertCircle, Target } from 'lucide-react';
+import { formatIndianCurrency, formatIndianNumber, convertToINR } from '@/lib/currency';
 
 interface DashboardStats {
   totalCustomers: number;
