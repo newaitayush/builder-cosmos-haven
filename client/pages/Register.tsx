@@ -131,7 +131,7 @@ export default function Register() {
                   </div>
                   <div className="p-4 bg-white dark:bg-gray-800 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-400">Monthly Salary</p>
-                    <p className="font-semibold">${parseInt(formData.monthly_salary).toLocaleString()}</p>
+                    <p className="font-semibold">{formatIndianCurrency(parseInt(formData.monthly_salary))}</p>
                   </div>
                 </div>
                 
