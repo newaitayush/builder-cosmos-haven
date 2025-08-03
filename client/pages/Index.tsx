@@ -26,12 +26,42 @@ export default function Index() {
               <Shield className="h-8 w-8 text-primary" />
               <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
             </div>
-            <nav className="hidden md:flex items-center space-x-6">
-              <Link to="/register" className="text-gray-600 hover:text-primary dark:text-gray-300">Register Customer</Link>
-              <Link to="/check-eligibility" className="text-gray-600 hover:text-primary dark:text-gray-300">Check Eligibility</Link>
-              <Link to="/loans" className="text-gray-600 hover:text-primary dark:text-gray-300">Loans</Link>
-              <Link to="/admin" className="text-gray-600 hover:text-primary dark:text-gray-300">Admin</Link>
-            </nav>
+            <div className="flex items-center space-x-6">
+              <nav className="hidden md:flex items-center space-x-6">
+                <Link to="/register" className="text-gray-600 hover:text-primary dark:text-gray-300">Register Customer</Link>
+                <Link to="/check-eligibility" className="text-gray-600 hover:text-primary dark:text-gray-300">Check Eligibility</Link>
+                {isAuthenticated && (
+                  <>
+                    <Link to="/loans" className="text-gray-600 hover:text-primary dark:text-gray-300">Loans</Link>
+                    {user?.role === 'admin' && (
+                      <Link to="/admin" className="text-gray-600 hover:text-primary dark:text-gray-300">Admin</Link>
+                    )}
+                  </>
+                )}
+              </nav>
+
+              {isAuthenticated ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+                      <User className="h-4 w-4" />
+                      <span>{user?.username}</span>
+                      <Badge variant="secondary" className="ml-1 text-xs">{user?.role}</Badge>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={logout} className="flex items-center space-x-2">
+                      <LogOut className="h-4 w-4" />
+                      <span>Logout</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Button asChild size="sm">
+                  <Link to="/login">Login</Link>
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </header>
