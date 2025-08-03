@@ -1,12 +1,20 @@
 import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Shield, ArrowLeft, Construction } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
 
-  const isPlaceholderRoute = ['/create-loan', '/loans'].includes(location.pathname);
+  const isPlaceholderRoute = ["/create-loan", "/loans"].includes(
+    location.pathname,
+  );
 
   if (isPlaceholderRoute) {
     return (
@@ -16,7 +24,9 @@ const NotFound = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <Shield className="h-8 w-8 text-primary" />
-                <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
+                <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                  CreditFlow
+                </span>
               </div>
               <Button asChild variant="ghost">
                 <Link to="/" className="flex items-center space-x-2">
@@ -41,10 +51,9 @@ const NotFound = () => {
               <CardContent>
                 <div className="space-y-4">
                   <p className="text-gray-600 dark:text-gray-400">
-                    {location.pathname === '/create-loan'
-                      ? 'The loan creation interface is currently under development. This will allow you to process new loan applications with automatic EMI calculations.'
-                      : 'The loan management interface is being built. This will provide comprehensive loan tracking and customer portfolio management.'
-                    }
+                    {location.pathname === "/create-loan"
+                      ? "The loan creation interface is currently under development. This will allow you to process new loan applications with automatic EMI calculations."
+                      : "The loan management interface is being built. This will provide comprehensive loan tracking and customer portfolio management."}
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -70,7 +79,9 @@ const NotFound = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center space-x-2">
             <Shield className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
+            <span className="text-2xl font-bold text-gray-900 dark:text-white">
+              CreditFlow
+            </span>
           </div>
         </div>
       </header>

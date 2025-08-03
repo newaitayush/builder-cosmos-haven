@@ -1,49 +1,55 @@
-import { useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Shield, Eye, EyeOff, UserPlus } from 'lucide-react';
-import { useAuth } from '@/lib/auth';
+import { useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Shield, Eye, EyeOff, UserPlus } from "lucide-react";
+import { useAuth } from "@/lib/auth";
 
 export default function Login() {
   // Login state
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   // Registration state
-  const [regEmail, setRegEmail] = useState('');
-  const [regUsername, setRegUsername] = useState('');
-  const [regPassword, setRegPassword] = useState('');
-  const [regConfirmPassword, setRegConfirmPassword] = useState('');
+  const [regEmail, setRegEmail] = useState("");
+  const [regUsername, setRegUsername] = useState("");
+  const [regPassword, setRegPassword] = useState("");
+  const [regConfirmPassword, setRegConfirmPassword] = useState("");
   const [showRegPassword, setShowRegPassword] = useState(false);
   const [showRegConfirmPassword, setShowRegConfirmPassword] = useState(false);
 
   // Common state
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState('login');
+  const [activeTab, setActiveTab] = useState("login");
 
   const { isAuthenticated, login, register } = useAuth();
   const location = useLocation();
-  
+
   // Redirect if already authenticated
   if (isAuthenticated) {
-    const from = (location.state as any)?.from?.pathname || '/admin';
+    const from = (location.state as any)?.from?.pathname || "/admin";
     return <Navigate to={from} replace />;
   }
 
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     if (!username || !password) {
-      setError('Please enter both username and password');
+      setError("Please enter both username and password");
       setLoading(false);
       return;
     }
@@ -51,10 +57,10 @@ export default function Login() {
     try {
       const success = await login(username, password);
       if (!success) {
-        setError('Invalid username or password');
+        setError("Invalid username or password");
       }
     } catch (err) {
-      setError('Login failed. Please try again.');
+      setError("Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -63,29 +69,29 @@ export default function Login() {
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     // Validation
     if (!regEmail || !regUsername || !regPassword || !regConfirmPassword) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       setLoading(false);
       return;
     }
 
     if (regPassword !== regConfirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       setLoading(false);
       return;
     }
 
     if (regPassword.length < 6) {
-      setError('Password must be at least 6 characters long');
+      setError("Password must be at least 6 characters long");
       setLoading(false);
       return;
     }
 
-    if (!regEmail.includes('@')) {
-      setError('Please enter a valid email address');
+    if (!regEmail.includes("@")) {
+      setError("Please enter a valid email address");
       setLoading(false);
       return;
     }
@@ -93,10 +99,10 @@ export default function Login() {
     try {
       const success = await register(regEmail, regPassword, regUsername);
       if (!success) {
-        setError('Username or email already exists');
+        setError("Username or email already exists");
       }
     } catch (err) {
-      setError('Registration failed. Please try again.');
+      setError("Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -108,7 +114,9 @@ export default function Login() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Shield className="h-10 w-10 text-primary" />
-            <span className="text-3xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
+            <span className="text-3xl font-bold text-gray-900 dark:text-white">
+              CreditFlow
+            </span>
           </div>
           <p className="text-gray-600 dark:text-gray-300">
             Sign in to your account or create a new one to get started
@@ -126,7 +134,11 @@ export default function Login() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+            <Tabs
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="space-y-4"
+            >
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="login">Sign In</TabsTrigger>
                 <TabsTrigger value="register">Register</TabsTrigger>
@@ -151,7 +163,7 @@ export default function Login() {
                     <div className="relative">
                       <Input
                         id="password"
-                        type={showPassword ? 'text' : 'password'}
+                        type={showPassword ? "text" : "password"}
                         placeholder="Enter password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -173,14 +185,14 @@ export default function Login() {
                     </div>
                   </div>
 
-                  {error && activeTab === 'login' && (
+                  {error && activeTab === "login" && (
                     <Alert variant="destructive">
                       <AlertDescription>{error}</AlertDescription>
                     </Alert>
                   )}
 
                   <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? 'Signing in...' : 'Sign In'}
+                    {loading ? "Signing in..." : "Sign In"}
                   </Button>
                 </form>
               </TabsContent>
@@ -216,7 +228,7 @@ export default function Login() {
                     <div className="relative">
                       <Input
                         id="reg-password"
-                        type={showRegPassword ? 'text' : 'password'}
+                        type={showRegPassword ? "text" : "password"}
                         placeholder="Create a password"
                         value={regPassword}
                         onChange={(e) => setRegPassword(e.target.value)}
@@ -239,11 +251,13 @@ export default function Login() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="reg-confirm-password">Confirm Password</Label>
+                    <Label htmlFor="reg-confirm-password">
+                      Confirm Password
+                    </Label>
                     <div className="relative">
                       <Input
                         id="reg-confirm-password"
-                        type={showRegConfirmPassword ? 'text' : 'password'}
+                        type={showRegConfirmPassword ? "text" : "password"}
                         placeholder="Confirm your password"
                         value={regConfirmPassword}
                         onChange={(e) => setRegConfirmPassword(e.target.value)}
@@ -254,7 +268,9 @@ export default function Login() {
                         variant="ghost"
                         size="sm"
                         className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                        onClick={() => setShowRegConfirmPassword(!showRegConfirmPassword)}
+                        onClick={() =>
+                          setShowRegConfirmPassword(!showRegConfirmPassword)
+                        }
                       >
                         {showRegConfirmPassword ? (
                           <EyeOff className="h-4 w-4" />
@@ -265,7 +281,7 @@ export default function Login() {
                     </div>
                   </div>
 
-                  {error && activeTab === 'register' && (
+                  {error && activeTab === "register" && (
                     <Alert variant="destructive">
                       <AlertDescription>{error}</AlertDescription>
                     </Alert>
@@ -273,7 +289,7 @@ export default function Login() {
 
                   <Button type="submit" className="w-full" disabled={loading}>
                     <UserPlus className="h-4 w-4 mr-2" />
-                    {loading ? 'Creating Account...' : 'Create Account'}
+                    {loading ? "Creating Account..." : "Create Account"}
                   </Button>
                 </form>
 

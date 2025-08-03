@@ -3,9 +3,9 @@
  * Uses the Indian numbering system (lakhs, crores)
  */
 export const formatIndianCurrency = (amount: number): string => {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(amount);
@@ -15,14 +15,17 @@ export const formatIndianCurrency = (amount: number): string => {
  * Formats large numbers in Indian style (lakhs, crores)
  */
 export const formatIndianNumber = (amount: number): string => {
-  if (amount >= 10000000) { // 1 crore
+  if (amount >= 10000000) {
+    // 1 crore
     return `₹${(amount / 10000000).toFixed(1)} Cr`;
-  } else if (amount >= 100000) { // 1 lakh
+  } else if (amount >= 100000) {
+    // 1 lakh
     return `₹${(amount / 100000).toFixed(1)} L`;
-  } else if (amount >= 1000) { // 1 thousand
+  } else if (amount >= 1000) {
+    // 1 thousand
     return `₹${(amount / 1000).toFixed(1)} K`;
   } else {
-    return `₹${amount.toLocaleString('en-IN')}`;
+    return `₹${amount.toLocaleString("en-IN")}`;
   }
 };
 

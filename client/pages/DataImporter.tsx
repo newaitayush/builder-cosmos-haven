@@ -1,13 +1,40 @@
-import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Shield, ArrowLeft, Upload, FileText, CheckCircle, AlertTriangle, Download } from 'lucide-react';
+import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Shield,
+  ArrowLeft,
+  Upload,
+  FileText,
+  CheckCircle,
+  AlertTriangle,
+  Download,
+} from "lucide-react";
 
 interface CustomerDataRow {
   first_name: string;
@@ -40,18 +67,18 @@ export default function DataImporter() {
   const [loading, setLoading] = useState(false);
   const [importResult, setImportResult] = useState<ImportResult | null>(null);
   const [showPreview, setShowPreview] = useState(false);
-  const [activeTab, setActiveTab] = useState('customers');
-  
+  const [activeTab, setActiveTab] = useState("customers");
+
   const customerFileRef = useRef<HTMLInputElement>(null);
   const loanFileRef = useRef<HTMLInputElement>(null);
 
   // Mock CSV parsing function (in real app, use a proper CSV parser like PapaParse)
   const parseCSV = (text: string): any[] => {
-    const lines = text.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim());
-    
-    return lines.slice(1).map(line => {
-      const values = line.split(',').map(v => v.trim().replace(/"/g, ''));
+    const lines = text.trim().split("\n");
+    const headers = lines[0].split(",").map((h) => h.trim());
+
+    return lines.slice(1).map((line) => {
+      const values = line.split(",").map((v) => v.trim().replace(/"/g, ""));
       const row: any = {};
       headers.forEach((header, index) => {
         row[header] = values[index];
@@ -60,117 +87,144 @@ export default function DataImporter() {
     });
   };
 
-  const handleFileUpload = async (file: File, type: 'customer' | 'loan') => {
+  const handleFileUpload = async (file: File, type: "customer" | "loan") => {
     if (!file) return;
 
     const text = await file.text();
-    
+
     try {
       const data = parseCSV(text);
-      
-      if (type === 'customer') {
+
+      if (type === "customer") {
         // Validate customer data structure
-        const customerRows: CustomerDataRow[] = data.map(row => ({
-          first_name: row.first_name || row.firstName || '',
-          last_name: row.last_name || row.lastName || '',
+        const customerRows: CustomerDataRow[] = data.map((row) => ({
+          first_name: row.first_name || row.firstName || "",
+          last_name: row.last_name || row.lastName || "",
           age: parseInt(row.age) || 0,
-          phone_number: row.phone_number || row.phoneNumber || row.phone || '',
-          monthly_salary: parseInt(row.monthly_salary) || parseInt(row.monthlySalary) || parseInt(row.salary) || 0
+          phone_number: row.phone_number || row.phoneNumber || row.phone || "",
+          monthly_salary:
+            parseInt(row.monthly_salary) ||
+            parseInt(row.monthlySalary) ||
+            parseInt(row.salary) ||
+            0,
         }));
-        
+
         setCustomerData(customerRows);
         setCustomerFile(file);
       } else {
         // Validate loan data structure
-        const loanRows: LoanDataRow[] = data.map(row => ({
-          customer_id: parseInt(row.customer_id) || parseInt(row.customerId) || 0,
-          loan_amount: parseInt(row.loan_amount) || parseInt(row.loanAmount) || parseInt(row.amount) || 0,
+        const loanRows: LoanDataRow[] = data.map((row) => ({
+          customer_id:
+            parseInt(row.customer_id) || parseInt(row.customerId) || 0,
+          loan_amount:
+            parseInt(row.loan_amount) ||
+            parseInt(row.loanAmount) ||
+            parseInt(row.amount) ||
+            0,
           tenure: parseInt(row.tenure) || parseInt(row.term) || 0,
-          interest_rate: parseFloat(row.interest_rate) || parseFloat(row.interestRate) || parseFloat(row.rate) || 0,
-          emis_paid_on_time: parseInt(row.emis_paid_on_time) || parseInt(row.emisPaidOnTime) || parseInt(row.paid_emis) || 0,
-          start_date: row.start_date || row.startDate || row.date || ''
+          interest_rate:
+            parseFloat(row.interest_rate) ||
+            parseFloat(row.interestRate) ||
+            parseFloat(row.rate) ||
+            0,
+          emis_paid_on_time:
+            parseInt(row.emis_paid_on_time) ||
+            parseInt(row.emisPaidOnTime) ||
+            parseInt(row.paid_emis) ||
+            0,
+          start_date: row.start_date || row.startDate || row.date || "",
         }));
-        
+
         setLoanData(loanRows);
         setLoanFile(file);
       }
-      
+
       setShowPreview(true);
     } catch (error) {
-      console.error('Error parsing file:', error);
-      alert('Error parsing file. Please check the format and try again.');
+      console.error("Error parsing file:", error);
+      alert("Error parsing file. Please check the format and try again.");
     }
   };
 
-  const validateData = (type: 'customer' | 'loan'): string[] => {
+  const validateData = (type: "customer" | "loan"): string[] => {
     const errors: string[] = [];
-    
-    if (type === 'customer') {
+
+    if (type === "customer") {
       customerData.forEach((row, index) => {
-        if (!row.first_name) errors.push(`Row ${index + 1}: Missing first name`);
+        if (!row.first_name)
+          errors.push(`Row ${index + 1}: Missing first name`);
         if (!row.last_name) errors.push(`Row ${index + 1}: Missing last name`);
-        if (row.age < 18 || row.age > 100) errors.push(`Row ${index + 1}: Invalid age (${row.age})`);
-        if (!row.phone_number) errors.push(`Row ${index + 1}: Missing phone number`);
-        if (row.monthly_salary <= 0) errors.push(`Row ${index + 1}: Invalid salary (${row.monthly_salary})`);
+        if (row.age < 18 || row.age > 100)
+          errors.push(`Row ${index + 1}: Invalid age (${row.age})`);
+        if (!row.phone_number)
+          errors.push(`Row ${index + 1}: Missing phone number`);
+        if (row.monthly_salary <= 0)
+          errors.push(
+            `Row ${index + 1}: Invalid salary (${row.monthly_salary})`,
+          );
       });
     } else {
       loanData.forEach((row, index) => {
-        if (row.customer_id <= 0) errors.push(`Row ${index + 1}: Invalid customer ID`);
-        if (row.loan_amount <= 0) errors.push(`Row ${index + 1}: Invalid loan amount`);
-        if (row.tenure <= 0 || row.tenure > 360) errors.push(`Row ${index + 1}: Invalid tenure`);
-        if (row.interest_rate <= 0 || row.interest_rate > 50) errors.push(`Row ${index + 1}: Invalid interest rate`);
-        if (!row.start_date) errors.push(`Row ${index + 1}: Missing start date`);
+        if (row.customer_id <= 0)
+          errors.push(`Row ${index + 1}: Invalid customer ID`);
+        if (row.loan_amount <= 0)
+          errors.push(`Row ${index + 1}: Invalid loan amount`);
+        if (row.tenure <= 0 || row.tenure > 360)
+          errors.push(`Row ${index + 1}: Invalid tenure`);
+        if (row.interest_rate <= 0 || row.interest_rate > 50)
+          errors.push(`Row ${index + 1}: Invalid interest rate`);
+        if (!row.start_date)
+          errors.push(`Row ${index + 1}: Missing start date`);
       });
     }
-    
+
     return errors;
   };
 
-  const handleImport = async (type: 'customer' | 'loan') => {
+  const handleImport = async (type: "customer" | "loan") => {
     setLoading(true);
-    
+
     try {
       const errors = validateData(type);
-      
+
       if (errors.length > 0) {
         setImportResult({
           success: false,
           processed: 0,
-          errors: errors.slice(0, 10) // Show first 10 errors
+          errors: errors.slice(0, 10), // Show first 10 errors
         });
         setLoading(false);
         return;
       }
 
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      const dataToImport = type === 'customer' ? customerData : loanData;
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      const dataToImport = type === "customer" ? customerData : loanData;
+
       // Here you would make actual API calls to import the data
       console.log(`Importing ${type} data:`, dataToImport);
-      
+
       setImportResult({
         success: true,
         processed: dataToImport.length,
-        errors: []
+        errors: [],
       });
-      
     } catch (error) {
       setImportResult({
         success: false,
         processed: 0,
-        errors: ['Failed to import data. Please try again.']
+        errors: ["Failed to import data. Please try again."],
       });
     } finally {
       setLoading(false);
     }
   };
 
-  const downloadSampleFile = (type: 'customer' | 'loan') => {
-    let csvContent = '';
-    
-    if (type === 'customer') {
+  const downloadSampleFile = (type: "customer" | "loan") => {
+    let csvContent = "";
+
+    if (type === "customer") {
       csvContent = `first_name,last_name,age,phone_number,monthly_salary
 John,Doe,30,+1234567890,75000
 Jane,Smith,28,+1234567891,80000
@@ -181,10 +235,10 @@ Michael,Johnson,35,+1234567892,65000`;
 2,750000,36,11.8,24,2023-02-20
 3,300000,12,13.2,8,2023-03-10`;
     }
-    
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+
+    const blob = new Blob([csvContent], { type: "text/csv" });
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `sample_${type}_data.csv`;
     a.click();
@@ -198,8 +252,12 @@ Michael,Johnson,35,+1234567892,65000`;
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Shield className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
-              <Badge variant="secondary" className="ml-2">Data Importer</Badge>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                CreditFlow
+              </span>
+              <Badge variant="secondary" className="ml-2">
+                Data Importer
+              </Badge>
             </div>
             <Button asChild variant="ghost">
               <Link to="/admin" className="flex items-center space-x-2">
@@ -222,7 +280,11 @@ Michael,Johnson,35,+1234567892,65000`;
             </p>
           </div>
 
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="space-y-6"
+          >
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="customers">Customer Data</TabsTrigger>
               <TabsTrigger value="loans">Loan Data</TabsTrigger>
@@ -236,7 +298,8 @@ Michael,Johnson,35,+1234567892,65000`;
                     <span>Import Customer Data</span>
                   </CardTitle>
                   <CardDescription>
-                    Upload a CSV file containing customer information (first_name, last_name, age, phone_number, monthly_salary)
+                    Upload a CSV file containing customer information
+                    (first_name, last_name, age, phone_number, monthly_salary)
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -250,7 +313,7 @@ Michael,Johnson,35,+1234567892,65000`;
                       Choose File
                     </Button>
                     <Button
-                      onClick={() => downloadSampleFile('customer')}
+                      onClick={() => downloadSampleFile("customer")}
                       variant="ghost"
                       className="flex-1"
                     >
@@ -258,20 +321,24 @@ Michael,Johnson,35,+1234567892,65000`;
                       Download Sample
                     </Button>
                   </div>
-                  
+
                   <input
                     ref={customerFileRef}
                     type="file"
                     accept=".csv,.xlsx,.xls"
-                    onChange={(e) => e.target.files?.[0] && handleFileUpload(e.target.files[0], 'customer')}
+                    onChange={(e) =>
+                      e.target.files?.[0] &&
+                      handleFileUpload(e.target.files[0], "customer")
+                    }
                     className="hidden"
                   />
-                  
+
                   {customerFile && (
                     <Alert>
                       <FileText className="h-4 w-4" />
                       <AlertDescription>
-                        File loaded: {customerFile.name} ({customerData.length} records)
+                        File loaded: {customerFile.name} ({customerData.length}{" "}
+                        records)
                       </AlertDescription>
                     </Alert>
                   )}
@@ -279,7 +346,9 @@ Michael,Johnson,35,+1234567892,65000`;
                   {customerData.length > 0 && (
                     <div className="space-y-4">
                       <div className="border rounded-lg p-4 bg-gray-50 dark:bg-gray-800">
-                        <h4 className="font-semibold mb-2">Preview (First 5 records)</h4>
+                        <h4 className="font-semibold mb-2">
+                          Preview (First 5 records)
+                        </h4>
                         <div className="overflow-x-auto">
                           <Table>
                             <TableHeader>
@@ -298,20 +367,24 @@ Michael,Johnson,35,+1234567892,65000`;
                                   <TableCell>{row.last_name}</TableCell>
                                   <TableCell>{row.age}</TableCell>
                                   <TableCell>{row.phone_number}</TableCell>
-                                  <TableCell>${row.monthly_salary.toLocaleString()}</TableCell>
+                                  <TableCell>
+                                    ${row.monthly_salary.toLocaleString()}
+                                  </TableCell>
                                 </TableRow>
                               ))}
                             </TableBody>
                           </Table>
                         </div>
                       </div>
-                      
-                      <Button 
-                        onClick={() => handleImport('customer')} 
+
+                      <Button
+                        onClick={() => handleImport("customer")}
                         disabled={loading}
                         className="w-full"
                       >
-                        {loading ? 'Importing...' : `Import ${customerData.length} Customer Records`}
+                        {loading
+                          ? "Importing..."
+                          : `Import ${customerData.length} Customer Records`}
                       </Button>
                     </div>
                   )}
@@ -327,7 +400,9 @@ Michael,Johnson,35,+1234567892,65000`;
                     <span>Import Loan Data</span>
                   </CardTitle>
                   <CardDescription>
-                    Upload a CSV file containing loan information (customer_id, loan_amount, tenure, interest_rate, emis_paid_on_time, start_date)
+                    Upload a CSV file containing loan information (customer_id,
+                    loan_amount, tenure, interest_rate, emis_paid_on_time,
+                    start_date)
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -341,7 +416,7 @@ Michael,Johnson,35,+1234567892,65000`;
                       Choose File
                     </Button>
                     <Button
-                      onClick={() => downloadSampleFile('loan')}
+                      onClick={() => downloadSampleFile("loan")}
                       variant="ghost"
                       className="flex-1"
                     >
@@ -349,15 +424,18 @@ Michael,Johnson,35,+1234567892,65000`;
                       Download Sample
                     </Button>
                   </div>
-                  
+
                   <input
                     ref={loanFileRef}
                     type="file"
                     accept=".csv,.xlsx,.xls"
-                    onChange={(e) => e.target.files?.[0] && handleFileUpload(e.target.files[0], 'loan')}
+                    onChange={(e) =>
+                      e.target.files?.[0] &&
+                      handleFileUpload(e.target.files[0], "loan")
+                    }
                     className="hidden"
                   />
-                  
+
                   {loanFile && (
                     <Alert>
                       <FileText className="h-4 w-4" />
@@ -370,7 +448,9 @@ Michael,Johnson,35,+1234567892,65000`;
                   {loanData.length > 0 && (
                     <div className="space-y-4">
                       <div className="border rounded-lg p-4 bg-gray-50 dark:bg-gray-800">
-                        <h4 className="font-semibold mb-2">Preview (First 5 records)</h4>
+                        <h4 className="font-semibold mb-2">
+                          Preview (First 5 records)
+                        </h4>
                         <div className="overflow-x-auto">
                           <Table>
                             <TableHeader>
@@ -387,7 +467,9 @@ Michael,Johnson,35,+1234567892,65000`;
                               {loanData.slice(0, 5).map((row, index) => (
                                 <TableRow key={index}>
                                   <TableCell>{row.customer_id}</TableCell>
-                                  <TableCell>${row.loan_amount.toLocaleString()}</TableCell>
+                                  <TableCell>
+                                    ${row.loan_amount.toLocaleString()}
+                                  </TableCell>
                                   <TableCell>{row.tenure} months</TableCell>
                                   <TableCell>{row.interest_rate}%</TableCell>
                                   <TableCell>{row.emis_paid_on_time}</TableCell>
@@ -398,13 +480,15 @@ Michael,Johnson,35,+1234567892,65000`;
                           </Table>
                         </div>
                       </div>
-                      
-                      <Button 
-                        onClick={() => handleImport('loan')} 
+
+                      <Button
+                        onClick={() => handleImport("loan")}
                         disabled={loading}
                         className="w-full"
                       >
-                        {loading ? 'Importing...' : `Import ${loanData.length} Loan Records`}
+                        {loading
+                          ? "Importing..."
+                          : `Import ${loanData.length} Loan Records`}
                       </Button>
                     </div>
                   )}
@@ -457,27 +541,31 @@ Michael,Johnson,35,+1234567892,65000`;
               ) : (
                 <AlertTriangle className="h-5 w-5 text-red-500" />
               )}
-              <span>Import {importResult?.success ? 'Successful' : 'Failed'}</span>
+              <span>
+                Import {importResult?.success ? "Successful" : "Failed"}
+              </span>
             </DialogTitle>
             <DialogDescription>
-              {importResult?.success 
+              {importResult?.success
                 ? `Successfully imported ${importResult.processed} records.`
-                : 'Import failed due to validation errors.'
-              }
+                : "Import failed due to validation errors."}
             </DialogDescription>
           </DialogHeader>
-          
+
           {importResult?.errors && importResult.errors.length > 0 && (
             <div className="space-y-2 max-h-60 overflow-y-auto">
               <p className="text-sm font-semibold">Errors:</p>
               {importResult.errors.map((error, index) => (
-                <p key={index} className="text-sm text-red-600 dark:text-red-400">
+                <p
+                  key={index}
+                  className="text-sm text-red-600 dark:text-red-400"
+                >
                   {error}
                 </p>
               ))}
             </div>
           )}
-          
+
           <div className="flex gap-3 pt-4">
             <Button onClick={() => setImportResult(null)} className="flex-1">
               Close

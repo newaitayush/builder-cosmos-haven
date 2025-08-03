@@ -1,13 +1,53 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { BarChart, Bar, XAxis, YAxis, PieChart, Pie, Cell, LineChart, Line, ResponsiveContainer } from 'recharts';
-import { Shield, ArrowLeft, TrendingUp, Users, CreditCard, IndianRupee, AlertCircle, Target } from 'lucide-react';
-import { formatIndianCurrency, formatIndianNumber, convertToINR } from '@/lib/currency';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  PieChart,
+  Pie,
+  Cell,
+  LineChart,
+  Line,
+  ResponsiveContainer,
+} from "recharts";
+import {
+  Shield,
+  ArrowLeft,
+  TrendingUp,
+  Users,
+  CreditCard,
+  IndianRupee,
+  AlertCircle,
+  Target,
+} from "lucide-react";
+import {
+  formatIndianCurrency,
+  formatIndianNumber,
+  convertToINR,
+} from "@/lib/currency";
 
 interface DashboardStats {
   totalCustomers: number;
@@ -50,9 +90,11 @@ export default function AdminDashboard() {
   const [approvalData, setApprovalData] = useState<ApprovalData[]>([]);
   const [creditScoreData, setCreditScoreData] = useState<CreditScoreData[]>([]);
   const [salaryBandData, setSalaryBandData] = useState<SalaryBandData[]>([]);
-  const [customerSegments, setCustomerSegments] = useState<CustomerSegmentData[]>([]);
+  const [customerSegments, setCustomerSegments] = useState<
+    CustomerSegmentData[]
+  >([]);
   const [loading, setLoading] = useState(true);
-  const [timeRange, setTimeRange] = useState('6m');
+  const [timeRange, setTimeRange] = useState("6m");
 
   const generateMockData = () => {
     // Dashboard Stats
@@ -62,46 +104,71 @@ export default function AdminDashboard() {
       totalDisbursed: convertToINR(45600000),
       averageCreditScore: 7.2,
       approvalRate: 78.5,
-      overdueLoans: 450
+      overdueLoans: 450,
     };
 
     // Approval/Rejection Data
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-    const mockApprovalData: ApprovalData[] = months.map(month => {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+    const mockApprovalData: ApprovalData[] = months.map((month) => {
       const total = Math.floor(Math.random() * 200) + 100;
       const approved = Math.floor(total * (0.7 + Math.random() * 0.2));
       return {
         month,
         approved,
         rejected: total - approved,
-        total
+        total,
       };
     });
 
     // Credit Score Distribution
     const mockCreditScoreData: CreditScoreData[] = [
-      { range: '9-10', count: 285, percentage: 32 },
-      { range: '7-8', count: 412, percentage: 45 },
-      { range: '5-6', count: 156, percentage: 17 },
-      { range: '3-4', count: 43, percentage: 5 },
-      { range: '0-2', count: 12, percentage: 1 }
+      { range: "9-10", count: 285, percentage: 32 },
+      { range: "7-8", count: 412, percentage: 45 },
+      { range: "5-6", count: 156, percentage: 17 },
+      { range: "3-4", count: 43, percentage: 5 },
+      { range: "0-2", count: 12, percentage: 1 },
     ];
 
     // Salary Band Analysis
     const mockSalaryBandData: SalaryBandData[] = [
-      { range: '₹15L-30L', customers: 432, avgLoanAmount: convertToINR(180000), approvalRate: 65 },
-      { range: '₹30L-50L', customers: 678, avgLoanAmount: convertToINR(320000), approvalRate: 75 },
-      { range: '₹50L-70L', customers: 543, avgLoanAmount: convertToINR(450000), approvalRate: 82 },
-      { range: '₹70L-100L', customers: 387, avgLoanAmount: convertToINR(620000), approvalRate: 88 },
-      { range: '₹100L+', customers: 234, avgLoanAmount: convertToINR(850000), approvalRate: 92 }
+      {
+        range: "₹15L-30L",
+        customers: 432,
+        avgLoanAmount: convertToINR(180000),
+        approvalRate: 65,
+      },
+      {
+        range: "₹30L-50L",
+        customers: 678,
+        avgLoanAmount: convertToINR(320000),
+        approvalRate: 75,
+      },
+      {
+        range: "₹50L-70L",
+        customers: 543,
+        avgLoanAmount: convertToINR(450000),
+        approvalRate: 82,
+      },
+      {
+        range: "₹70L-100L",
+        customers: 387,
+        avgLoanAmount: convertToINR(620000),
+        approvalRate: 88,
+      },
+      {
+        range: "₹100L+",
+        customers: 234,
+        avgLoanAmount: convertToINR(850000),
+        approvalRate: 92,
+      },
     ];
 
     // Customer Segments
     const mockCustomerSegments: CustomerSegmentData[] = [
-      { segment: 'Prime', count: 1024, value: 36, color: '#22c55e' },
-      { segment: 'Near Prime', count: 854, value: 30, color: '#3b82f6' },
-      { segment: 'Subprime', count: 612, value: 21, color: '#f59e0b' },
-      { segment: 'Deep Subprime', count: 357, value: 13, color: '#ef4444' }
+      { segment: "Prime", count: 1024, value: 36, color: "#22c55e" },
+      { segment: "Near Prime", count: 854, value: 30, color: "#3b82f6" },
+      { segment: "Subprime", count: 612, value: 21, color: "#f59e0b" },
+      { segment: "Deep Subprime", count: 357, value: 13, color: "#ef4444" },
     ];
 
     return {
@@ -109,7 +176,7 @@ export default function AdminDashboard() {
       approvalData: mockApprovalData,
       creditScoreData: mockCreditScoreData,
       salaryBandData: mockSalaryBandData,
-      customerSegments: mockCustomerSegments
+      customerSegments: mockCustomerSegments,
     };
   };
 
@@ -117,8 +184,8 @@ export default function AdminDashboard() {
     const fetchDashboardData = async () => {
       setLoading(true);
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       const mockData = generateMockData();
       setStats(mockData.stats);
       setApprovalData(mockData.approvalData);
@@ -137,20 +204,20 @@ export default function AdminDashboard() {
 
   const chartConfig = {
     approved: {
-      label: 'Approved',
-      color: '#22c55e',
+      label: "Approved",
+      color: "#22c55e",
     },
     rejected: {
-      label: 'Rejected',
-      color: '#ef4444',
+      label: "Rejected",
+      color: "#ef4444",
     },
     customers: {
-      label: 'Customers',
-      color: '#3b82f6',
+      label: "Customers",
+      color: "#3b82f6",
     },
     avgLoanAmount: {
-      label: 'Avg Loan Amount',
-      color: '#8b5cf6',
+      label: "Avg Loan Amount",
+      color: "#8b5cf6",
     },
   };
 
@@ -172,8 +239,12 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Shield className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
-              <Badge variant="secondary" className="ml-2">Admin</Badge>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                CreditFlow
+              </span>
+              <Badge variant="secondary" className="ml-2">
+                Admin
+              </Badge>
             </div>
             <div className="flex items-center space-x-4">
               <Select value={timeRange} onValueChange={setTimeRange}>
@@ -213,9 +284,15 @@ export default function AdminDashboard() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Total Customers</p>
-                  <p className="text-3xl font-bold">{stats?.totalCustomers.toLocaleString()}</p>
-                  <p className="text-sm text-green-600 mt-1">↑ 12% from last month</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Total Customers
+                  </p>
+                  <p className="text-3xl font-bold">
+                    {stats?.totalCustomers.toLocaleString()}
+                  </p>
+                  <p className="text-sm text-green-600 mt-1">
+                    ↑ 12% from last month
+                  </p>
                 </div>
                 <Users className="h-8 w-8 text-primary" />
               </div>
@@ -226,9 +303,15 @@ export default function AdminDashboard() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Active Loans</p>
-                  <p className="text-3xl font-bold">{stats?.totalLoans.toLocaleString()}</p>
-                  <p className="text-sm text-green-600 mt-1">↑ 8% from last month</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Active Loans
+                  </p>
+                  <p className="text-3xl font-bold">
+                    {stats?.totalLoans.toLocaleString()}
+                  </p>
+                  <p className="text-sm text-green-600 mt-1">
+                    ↑ 8% from last month
+                  </p>
                 </div>
                 <CreditCard className="h-8 w-8 text-accent" />
               </div>
@@ -239,9 +322,15 @@ export default function AdminDashboard() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Total Disbursed</p>
-                  <p className="text-3xl font-bold">{formatIndianNumber(stats?.totalDisbursed || 0)}</p>
-                  <p className="text-sm text-green-600 mt-1">↑ 15% from last month</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Total Disbursed
+                  </p>
+                  <p className="text-3xl font-bold">
+                    {formatIndianNumber(stats?.totalDisbursed || 0)}
+                  </p>
+                  <p className="text-sm text-green-600 mt-1">
+                    ↑ 15% from last month
+                  </p>
                 </div>
                 <IndianRupee className="h-8 w-8 text-green-500" />
               </div>
@@ -252,9 +341,13 @@ export default function AdminDashboard() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Approval Rate</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Approval Rate
+                  </p>
                   <p className="text-3xl font-bold">{stats?.approvalRate}%</p>
-                  <p className="text-sm text-red-600 mt-1">↓ 2% from last month</p>
+                  <p className="text-sm text-red-600 mt-1">
+                    ↓ 2% from last month
+                  </p>
                 </div>
                 <Target className="h-8 w-8 text-blue-500" />
               </div>
@@ -268,7 +361,9 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader>
               <CardTitle>Approval vs Rejection Trends</CardTitle>
-              <CardDescription>Monthly loan approval and rejection statistics</CardDescription>
+              <CardDescription>
+                Monthly loan approval and rejection statistics
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfig} className="h-80">
@@ -276,8 +371,16 @@ export default function AdminDashboard() {
                   <XAxis dataKey="month" />
                   <YAxis />
                   <ChartTooltip content={<ChartTooltipContent />} />
-                  <Bar dataKey="approved" fill="var(--color-approved)" radius={4} />
-                  <Bar dataKey="rejected" fill="var(--color-rejected)" radius={4} />
+                  <Bar
+                    dataKey="approved"
+                    fill="var(--color-approved)"
+                    radius={4}
+                  />
+                  <Bar
+                    dataKey="rejected"
+                    fill="var(--color-rejected)"
+                    radius={4}
+                  />
                 </BarChart>
               </ChartContainer>
             </CardContent>
@@ -287,17 +390,21 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader>
               <CardTitle>Credit Score Distribution</CardTitle>
-              <CardDescription>Customer distribution across credit score ranges</CardDescription>
+              <CardDescription>
+                Customer distribution across credit score ranges
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfig} className="h-80">
                 <BarChart data={creditScoreData} layout="horizontal">
                   <XAxis type="number" />
                   <YAxis dataKey="range" type="category" width={50} />
-                  <ChartTooltip 
-                    content={<ChartTooltipContent 
-                      formatter={(value) => [`${value} customers`, 'Count']}
-                    />} 
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={(value) => [`${value} customers`, "Count"]}
+                      />
+                    }
                   />
                   <Bar dataKey="count" fill="#3b82f6" radius={4} />
                 </BarChart>
@@ -312,7 +419,9 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader>
               <CardTitle>Customer Segments</CardTitle>
-              <CardDescription>Distribution by credit worthiness segments</CardDescription>
+              <CardDescription>
+                Distribution by credit worthiness segments
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-80">
@@ -330,15 +439,19 @@ export default function AdminDashboard() {
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <ChartTooltip 
+                    <ChartTooltip
                       content={({ active, payload }) => {
                         if (active && payload && payload.length) {
                           const data = payload[0].payload;
                           return (
                             <div className="bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg">
                               <p className="font-semibold">{data.segment}</p>
-                              <p className="text-sm">Count: {data.count.toLocaleString()}</p>
-                              <p className="text-sm">Percentage: {data.value}%</p>
+                              <p className="text-sm">
+                                Count: {data.count.toLocaleString()}
+                              </p>
+                              <p className="text-sm">
+                                Percentage: {data.value}%
+                              </p>
                             </div>
                           );
                         }
@@ -355,32 +468,64 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader>
               <CardTitle>Salary Band Analysis</CardTitle>
-              <CardDescription>Customer distribution and loan amounts by salary range</CardDescription>
+              <CardDescription>
+                Customer distribution and loan amounts by salary range
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfig} className="h-80">
                 <LineChart data={salaryBandData}>
-                  <XAxis dataKey="range" angle={-45} textAnchor="end" height={80} />
+                  <XAxis
+                    dataKey="range"
+                    angle={-45}
+                    textAnchor="end"
+                    height={80}
+                  />
                   <YAxis yAxisId="left" />
                   <YAxis yAxisId="right" orientation="right" />
-                  <ChartTooltip 
+                  <ChartTooltip
                     content={({ active, payload, label }) => {
                       if (active && payload && payload.length) {
                         return (
                           <div className="bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg">
                             <p className="font-semibold">{label}</p>
-                            <p className="text-sm">Customers: {payload[0]?.value?.toLocaleString()}</p>
-                            <p className="text-sm">Avg Loan: {formatCurrency(Number(payload[1]?.value) || 0)}</p>
-                            <p className="text-sm">Approval Rate: {payload[2]?.value}%</p>
+                            <p className="text-sm">
+                              Customers: {payload[0]?.value?.toLocaleString()}
+                            </p>
+                            <p className="text-sm">
+                              Avg Loan:{" "}
+                              {formatCurrency(Number(payload[1]?.value) || 0)}
+                            </p>
+                            <p className="text-sm">
+                              Approval Rate: {payload[2]?.value}%
+                            </p>
                           </div>
                         );
                       }
                       return null;
                     }}
                   />
-                  <Line yAxisId="left" type="monotone" dataKey="customers" stroke="#3b82f6" strokeWidth={3} />
-                  <Line yAxisId="right" type="monotone" dataKey="avgLoanAmount" stroke="#8b5cf6" strokeWidth={3} />
-                  <Line yAxisId="left" type="monotone" dataKey="approvalRate" stroke="#22c55e" strokeWidth={3} />
+                  <Line
+                    yAxisId="left"
+                    type="monotone"
+                    dataKey="customers"
+                    stroke="#3b82f6"
+                    strokeWidth={3}
+                  />
+                  <Line
+                    yAxisId="right"
+                    type="monotone"
+                    dataKey="avgLoanAmount"
+                    stroke="#8b5cf6"
+                    strokeWidth={3}
+                  />
+                  <Line
+                    yAxisId="left"
+                    type="monotone"
+                    dataKey="approvalRate"
+                    stroke="#22c55e"
+                    strokeWidth={3}
+                  />
                 </LineChart>
               </ChartContainer>
             </CardContent>
@@ -404,7 +549,9 @@ export default function AdminDashboard() {
                 </div>
                 <div className="flex justify-between">
                   <span>Avg Credit Score</span>
-                  <Badge variant="default">{stats?.averageCreditScore}/10</Badge>
+                  <Badge variant="default">
+                    {stats?.averageCreditScore}/10
+                  </Badge>
                 </div>
                 <div className="flex justify-between">
                   <span>High Risk Customers</span>

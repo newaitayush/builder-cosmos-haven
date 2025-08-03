@@ -1,12 +1,36 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { CreditCard, Users, IndianRupee, TrendingUp, Shield, Clock, User, LogOut } from 'lucide-react';
-import { useAuth } from '@/lib/auth';
-import { formatIndianCurrency, formatIndianNumber, convertToINR } from '@/lib/currency';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  CreditCard,
+  Users,
+  IndianRupee,
+  TrendingUp,
+  Shield,
+  Clock,
+  User,
+  LogOut,
+} from "lucide-react";
+import { useAuth } from "@/lib/auth";
+import {
+  formatIndianCurrency,
+  formatIndianNumber,
+  convertToINR,
+} from "@/lib/currency";
 
 export default function Index() {
   const { isAuthenticated, user, logout } = useAuth();
@@ -25,17 +49,39 @@ export default function Index() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Shield className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">CreditFlow</span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                CreditFlow
+              </span>
             </div>
             <div className="flex items-center space-x-6">
               <nav className="hidden md:flex items-center space-x-6">
-                <Link to="/register" className="text-gray-600 hover:text-primary dark:text-gray-300">Register Customer</Link>
-                <Link to="/check-eligibility" className="text-gray-600 hover:text-primary dark:text-gray-300">Check Eligibility</Link>
+                <Link
+                  to="/register"
+                  className="text-gray-600 hover:text-primary dark:text-gray-300"
+                >
+                  Register Customer
+                </Link>
+                <Link
+                  to="/check-eligibility"
+                  className="text-gray-600 hover:text-primary dark:text-gray-300"
+                >
+                  Check Eligibility
+                </Link>
                 {isAuthenticated && (
                   <>
-                    <Link to="/loans" className="text-gray-600 hover:text-primary dark:text-gray-300">Loans</Link>
-                    {user?.role === 'admin' && (
-                      <Link to="/admin" className="text-gray-600 hover:text-primary dark:text-gray-300">Admin</Link>
+                    <Link
+                      to="/loans"
+                      className="text-gray-600 hover:text-primary dark:text-gray-300"
+                    >
+                      Loans
+                    </Link>
+                    {user?.role === "admin" && (
+                      <Link
+                        to="/admin"
+                        className="text-gray-600 hover:text-primary dark:text-gray-300"
+                      >
+                        Admin
+                      </Link>
                     )}
                   </>
                 )}
@@ -44,14 +90,23 @@ export default function Index() {
               {isAuthenticated ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex items-center space-x-2"
+                    >
                       <User className="h-4 w-4" />
                       <span>{user?.username}</span>
-                      <Badge variant="secondary" className="ml-1 text-xs">{user?.role}</Badge>
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {user?.role}
+                      </Badge>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={logout} className="flex items-center space-x-2">
+                    <DropdownMenuItem
+                      onClick={logout}
+                      className="flex items-center space-x-2"
+                    >
                       <LogOut className="h-4 w-4" />
                       <span>Logout</span>
                     </DropdownMenuItem>
@@ -74,14 +129,20 @@ export default function Index() {
             Smart Credit Approval System
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-            Streamline your lending process with intelligent credit scoring, automated approvals,
-            and comprehensive loan management. Make informed decisions faster than ever.
+            Streamline your lending process with intelligent credit scoring,
+            automated approvals, and comprehensive loan management. Make
+            informed decisions faster than ever.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="text-lg px-8 py-3">
               <Link to="/register">Register New Customer</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="text-lg px-8 py-3">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="text-lg px-8 py-3"
+            >
               <Link to="/check-eligibility">Check Loan Eligibility</Link>
             </Button>
           </div>
@@ -95,7 +156,9 @@ export default function Index() {
             <Card className="text-center">
               <CardHeader className="pb-2">
                 <Users className="h-8 w-8 text-primary mx-auto mb-2" />
-                <CardTitle className="text-3xl font-bold">{stats.totalCustomers.toLocaleString('en-IN')}</CardTitle>
+                <CardTitle className="text-3xl font-bold">
+                  {stats.totalCustomers.toLocaleString("en-IN")}
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>Total Customers</CardDescription>
@@ -105,7 +168,9 @@ export default function Index() {
             <Card className="text-center">
               <CardHeader className="pb-2">
                 <CreditCard className="h-8 w-8 text-accent mx-auto mb-2" />
-                <CardTitle className="text-3xl font-bold">{stats.activeLoans.toLocaleString('en-IN')}</CardTitle>
+                <CardTitle className="text-3xl font-bold">
+                  {stats.activeLoans.toLocaleString("en-IN")}
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>Active Loans</CardDescription>
@@ -115,7 +180,9 @@ export default function Index() {
             <Card className="text-center">
               <CardHeader className="pb-2">
                 <TrendingUp className="h-8 w-8 text-green-500 mx-auto mb-2" />
-                <CardTitle className="text-3xl font-bold">{stats.approvalRate}%</CardTitle>
+                <CardTitle className="text-3xl font-bold">
+                  {stats.approvalRate}%
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>Approval Rate</CardDescription>
@@ -125,7 +192,9 @@ export default function Index() {
             <Card className="text-center">
               <CardHeader className="pb-2">
                 <IndianRupee className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-                <CardTitle className="text-3xl font-bold">{formatIndianNumber(stats.totalDisbursed)}</CardTitle>
+                <CardTitle className="text-3xl font-bold">
+                  {formatIndianNumber(stats.totalDisbursed)}
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>Total Disbursed</CardDescription>
@@ -149,8 +218,9 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Advanced algorithms analyze payment history and calculate precise credit scores
-                  based on EMI payment patterns and financial behavior.
+                  Advanced algorithms analyze payment history and calculate
+                  precise credit scores based on EMI payment patterns and
+                  financial behavior.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -162,8 +232,8 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Real-time eligibility checks with automated approval recommendations
-                  and competitive interest rate suggestions.
+                  Real-time eligibility checks with automated approval
+                  recommendations and competitive interest rate suggestions.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -175,8 +245,8 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Comprehensive loan tracking with EMI calculations, payment schedules,
-                  and detailed customer loan portfolios.
+                  Comprehensive loan tracking with EMI calculations, payment
+                  schedules, and detailed customer loan portfolios.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -204,7 +274,7 @@ export default function Index() {
                 </CardContent>
               </Link>
             </Card>
-            
+
             <Card className="hover:shadow-lg transition-all hover:scale-105 cursor-pointer">
               <Link to="/check-eligibility">
                 <CardHeader className="text-center">
@@ -218,7 +288,7 @@ export default function Index() {
                 </CardContent>
               </Link>
             </Card>
-            
+
             <Card className="hover:shadow-lg transition-all hover:scale-105 cursor-pointer">
               <Link to="/create-loan">
                 <CardHeader className="text-center">
@@ -232,7 +302,7 @@ export default function Index() {
                 </CardContent>
               </Link>
             </Card>
-            
+
             <Card className="hover:shadow-lg transition-all hover:scale-105 cursor-pointer">
               <Link to="/loans">
                 <CardHeader className="text-center">

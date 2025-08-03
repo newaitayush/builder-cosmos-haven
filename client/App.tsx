@@ -32,26 +32,38 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/check-eligibility" element={<CheckEligibility />} />
-            <Route path="/create-loan" element={
-              <ProtectedRoute>
-                <CreateLoan />
-              </ProtectedRoute>
-            } />
-            <Route path="/loans" element={
-              <ProtectedRoute>
-                <ViewLoans />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin" element={
-              <ProtectedRoute requiredRole="admin">
-                <AdminDashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/import" element={
-              <ProtectedRoute requiredRole="admin">
-                <DataImporter />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/create-loan"
+              element={
+                <ProtectedRoute>
+                  <CreateLoan />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/loans"
+              element={
+                <ProtectedRoute>
+                  <ViewLoans />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/import"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <DataImporter />
+                </ProtectedRoute>
+              }
+            />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
