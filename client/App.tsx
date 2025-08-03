@@ -73,4 +73,19 @@ const App = () => (
   </QueryClientProvider>
 );
 
-createRoot(document.getElementById("root")!).render(<App />);
+// Proper root management to prevent createRoot warnings
+const container = document.getElementById("root");
+if (!container) {
+  throw new Error("Root element not found");
+}
+
+// Check if root already exists to prevent multiple createRoot calls
+let root: ReturnType<typeof createRoot>;
+if (!(container as any)._reactRoot) {
+  root = createRoot(container);
+  (container as any)._reactRoot = root;
+} else {
+  root = (container as any)._reactRoot;
+}
+
+root.render(<App />);
